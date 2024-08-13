@@ -1,8 +1,11 @@
-function App() {
+import { BrowserRouter } from "react-router-dom"
+import Routes from "./Routes"
+
+const App = () => {
   return (
-    <h1>
-      Hello World!!!
-    </h1>
+    <BrowserRouter>
+      <Routes />
+    </BrowserRouter>
   )
 }
 
