@@ -1,7 +1,7 @@
 import { useRoutes } from "react-router-dom";
 import ProductList from "./features/ProductCatalog/pages/ProductList";
 import ProductDetail from "./features/ProductCatalog/pages/ProductDetail";
-import NotFoundPage from "./shared/pages/NotFoundPage";
+import NotFound from "./shared/pages/NotFound";
 
 const Routes = () => {
     let routes = useRoutes([
@@ -15,7 +15,7 @@ const Routes = () => {
         },
         {
             path: "/*",
-            element: <NotFoundPage />
+            element: <NotFound />
         }
     ]);
     return routes;
