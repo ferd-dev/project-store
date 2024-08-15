@@ -1,32 +1,63 @@
-import Layout from "../../../shared/components/Layout";
-import Filter from "../components/Filter";
-import Pagination from "../components/Pagination";
-import ProductCard from "../components/ProductCard";
-import Search from "../components/Search";
+import { useEffect, useState } from 'react';
+import Layout from '../../../shared/components/Layout';
+import ButtonSeeMore from '../components/ButtonSeeMore';
+import CardNameCategory from '../components/CardNameCategory';
+import ProductCard from '../components/ProductCard';
+import Search from '../components/Search';
+import { Product } from '../types/Product';
+import Loading from '../../../shared/pages/Loading';
 
 const ProductList = () => {
-    return (
-        <Layout>
-            <section className="bg-gray-50 py-8 antialiased dark:bg-gray-900 md:py-12 ">
-                <div className="max-w-screen-xl px-4 2xl:px-0 mx-auto">
-                    <div className="mb-4 flex flex-col items-center justify-center space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4 md:mb-8">
-                        <Search />
-                        <Filter />
-                    </div>
-                    <div className="mb-4 grid gap-4 sm:grid-cols-2 md:mb-8 lg:grid-cols-3 xl:grid-cols-4">
-                        <ProductCard />
-                        <ProductCard />
-                        <ProductCard />
-                        <ProductCard />
-                        <ProductCard />
-                    </div>
-                    <div className="w-full text-center">
-                        <Pagination />
-                    </div>
-                </div>
-            </section>
-        </Layout >
-    );
+	const [products, setProducts] = useState<Product[]>([]);
+
+	useEffect(() => {
+		const fetchProducts = async () => {
+			const response = await fetch(
+				'https://api.escuelajs.co/api/v1/products?limit=10&offset=1'
+			);
+			const data = await response.json();
+			setProducts(data);
+		};
+
+		fetchProducts();
+	}, []);
+
+	if (!products.length) {
+		return (
+			<Layout>
+				<Loading />
+			</Layout>
+		);
+	}
+
+	return (
+		<Layout>
+			<section>
+				{!products.length ? (
+					<Loading />
+				) : (
+					<div className='max-w-screen-xl px-4 2xl:px-0 mx-auto'>
+						<Search />
+						<div>
+							<CardNameCategory />
+							<div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-5'>
+								{products.map((product) => (
+									<ProductCard
+										key={product.id}
+										title={product.title}
+										image={product.images[0]}
+										price={product.price}
+										id={product.id}
+									/>
+								))}
+							</div>
+							<ButtonSeeMore />
+						</div>
+					</div>
+				)}
+			</section>
+		</Layout>
+	);
 };
 
 export default ProductList;

@@ -1,66 +1,42 @@
-const ProductCard = () => {
-    return (
-        <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
-            <div className="h-56 w-full">
-                <a href="#">
-                    <img className="mx-auto h-full dark:hidden" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front.svg" alt="" />
-                    <img className="mx-auto hidden h-full dark:block" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front-dark.svg" alt="" />
-                </a>
-            </div>
-            <div className="pt-6">
-                <div className="mb-4 flex items-center justify-center gap-4">
-                    <div className="flex items-center justify-end gap-1">
-                        <button type="button" data-tooltip-target="tooltip-quick-look" className="rounded-lg p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                            <span className="sr-only"> Quick look </span>
-                            <svg className="h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" d="M21 12c0 1.2-4.03 6-9 6s-9-4.8-9-6c0-1.2 4.03-6 9-6s9 4.8 9 6Z" />
-                                <path stroke="currentColor" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                            </svg>
-                        </button>
-                        <div id="tooltip-quick-look" role="tooltip" className="tooltip invisible absolute z-10 inline-block rounded-lg bg-gray-900 px-3 py-2 text-sm font-medium text-white opacity-0 shadow-sm transition-opacity duration-300 dark:bg-gray-700" data-popper-placement="top">
-                            Quick look
-                            <div className="tooltip-arrow" data-popper-arrow=""></div>
-                        </div>
+type Props = {
+	id: number;
+	title: string;
+	price: number;
+	image: string;
+};
 
-                        <button type="button" data-tooltip-target="tooltip-add-to-favorites" className="rounded-lg p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                            <span className="sr-only"> Add to Favorites </span>
-                            <svg className="h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" d="M12 6C6.5 1 1 8 5.8 13l6.2 7 6.2-7C23 8 17.5 1 12 6Z" />
-                            </svg>
-                        </button>
-                        <div id="tooltip-add-to-favorites" role="tooltip" className="tooltip invisible absolute z-10 inline-block rounded-lg bg-gray-900 px-3 py-2 text-sm font-medium text-white opacity-0 shadow-sm transition-opacity duration-300 dark:bg-gray-700" data-popper-placement="top">
-                            Add to favorites
-                            <div className="tooltip-arrow" data-popper-arrow=""></div>
-                        </div>
-                    </div>
-                </div>
+const ProductCard = ({ title, price, image }: Props) => {
+	return (
+		<div className='bg-white rounded-lg shadow-lg p-4 flex flex-col justify-between hover:shadow-2xl transition-shadow duration-300'>
+			<a href='url-del-producto' className='block flex-grow'>
+				<img
+					src={image}
+					alt='Nombre del producto'
+					className='rounded-t-lg w-full h-auto object-cover'
+				/>
+				<h3 className='text-lg font-semibold mt-2'>{title}</h3>
+				<p className='text-lg font-bold text-black'>$ {price}</p>
+			</a>
+			<div className='flex flex-col items-center'>
+				<button className='mt-4 border text-black py-1 px-1 rounded-full flex items-center justify-center w-2/4 hover:bg-blue-700 hover:text-white focus:outline-none text-sm'>
+					<svg
+						className='w-5 h-5 mr-2'
+						fill='none'
+						stroke='currentColor'
+						viewBox='0 0 24 24'
+						xmlns='http://www.w3.org/2000/svg'>
+						<path
+							strokeLinecap='round'
+							strokeLinejoin='round'
+							strokeWidth='2'
+							d='M3 3h2l.401 1.607A1 1 0 006.382 6h13.236a1 1 0 00.981-.783L21 4H5.401m-2.372 1h18.342a1 1 0 01.98 1.217l-1.5 6A1 1 0 0117.763 13H7.237a1 1 0 01-.981-.783L4.256 6.926M3 3v2m-1 1h4m-4 8h18v2H2v-2z'
+						/>
+					</svg>
+					Add to cart
+				</button>
+			</div>
+		</div>
+	);
+};
 
-                <a href="#" className="text-lg font-semibold leading-tight text-gray-900 hover:underline dark:text-white">Apple iMac 27", 1TB HDD, Retina 5K Display, M3 Max</a>
-
-                <ul className="mt-2 flex items-center gap-4">
-
-
-                    <li className="flex items-center gap-2">
-                        <svg className="h-4 w-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" d="M8 7V6c0-.6.4-1 1-1h11c.6 0 1 .4 1 1v7c0 .6-.4 1-1 1h-1M3 18v-7c0-.6.4-1 1-1h11c.6 0 1 .4 1 1v7c0 .6-.4 1-1 1H4a1 1 0 0 1-1-1Zm8-3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
-                        </svg>
-                        <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Category 1</p>
-                    </li>
-                </ul>
-
-                <div className="mt-4 flex items-center justify-between gap-4">
-                    <p className="text-2xl font-extrabold leading-tight text-gray-900 dark:text-white">$1,699</p>
-
-                    <button type="button" className="inline-flex items-center rounded-lg bg-primary-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4  focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
-                        <svg className="-ms-2 me-2 h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" d="M4 4h1.5L8 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm.75-3H7.5M11 7H6.312M17 4v6m-3-3h6" />
-                        </svg>
-                        Add to cart
-                    </button>
-                </div>
-            </div>
-        </div>
-    )
-}
-
-export default ProductCard
+export default ProductCard;
