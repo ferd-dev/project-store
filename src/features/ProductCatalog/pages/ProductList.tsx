@@ -16,15 +16,7 @@ const ProductList = () => {
 				'https://api.escuelajs.co/api/v1/products?limit=10&offset=1'
 			);
 			const data = await response.json();
-
-			const mappedProducts: Product[] = data.map((item: any) => ({
-				id: item.id,
-				title: item.title,
-				price: item.price,
-				image: item.images[0]
-			}));
-
-			setProducts(mappedProducts);
+			setProducts(data);
 		};
 
 		fetchProducts();
@@ -50,7 +42,13 @@ const ProductList = () => {
 							<CardNameCategory />
 							<div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-5'>
 								{products.map((product) => (
-									<ProductCard key={product.id} product={product} />
+									<ProductCard
+										key={product.id}
+										title={product.title}
+										image={product.images[0]}
+										price={product.price}
+										id={product.id}
+									/>
 								))}
 							</div>
 							<ButtonSeeMore />
