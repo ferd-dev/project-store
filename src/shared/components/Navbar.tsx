@@ -6,8 +6,8 @@ const Navbar = () => {
 			<div className='max-w-screen-xl px-4 mx-auto 2xl:px-0 py-4'>
 				<div className='flex items-center justify-between'>
 					<div className='flex items-center space-x-8'>
-						<div className='shrink-0 text-primary-700 text-lg'>
-							<NavLink to='/'>Store</NavLink>
+						<div className='shrink-0 text-primary-700 text-2xl font-pacifico'>
+							<NavLink to='/'>ReactShop</NavLink>
 						</div>
 
 						<ul className='hidden lg:flex items-center justify-start gap-6 md:gap-8 py-3 sm:justify-center'>
