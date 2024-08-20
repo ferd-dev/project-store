@@ -34,7 +34,7 @@ const Navbar = () => {
 							{categories.map((category) => (
 								<NavItem
 									key={category.id}
-									to={category.name}
+									to={`category/${category.id}`}
 									name={category.name}
 								/>
 							))}
