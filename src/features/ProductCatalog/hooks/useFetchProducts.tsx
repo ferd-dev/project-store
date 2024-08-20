@@ -18,13 +18,13 @@ interface Product {
 interface UseFetchProductsReturn {
   products: Product[];
   loading: boolean;
-  error: string | null;
+  error: boolean;
 }
 
 export const useFetchProducts = (): UseFetchProductsReturn => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -32,13 +32,13 @@ export const useFetchProducts = (): UseFetchProductsReturn => {
         const response = await fetch(
           'https://api.escuelajs.co/api/v1/products?limit=10&offset=1'
         );
-        if (!response.ok) {
-          throw new Error('Failed to fetch products');
-        }
+        if (!response.ok) throw new Error('Failed to fetch products');
+
         const data: Product[] = await response.json();
         setProducts(data);
       } catch (err) {
-        setError((err as Error).message);
+        console.error(err);
+        setError(true);
       } finally {
         setLoading(false);
       }
