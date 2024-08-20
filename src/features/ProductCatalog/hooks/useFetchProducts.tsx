@@ -1,19 +1,5 @@
 import { useState, useEffect } from 'react';
-
-interface Category {
-  id: number;
-  name: string;
-  image: string;
-}
-
-interface Product {
-  id: number;
-  title: string;
-  price: number;
-  description: string;
-  category: Category;
-  images: string[];
-}
+import { Product } from '../interfaces/Product';
 
 interface UseFetchProductsReturn {
   //   products: Product[];
