@@ -21,7 +21,7 @@ const DetailsProduct = ({ productId }: Props) => {
         <p className="font-inter font-normal text-sm sm:text-base leading-4 sm:leading-5 text-[#1E1E1E] p-2">
             select size
         </p>
-        
+        <ListSize />
         <div className='flex flex-col sm:flex-row mt-4 '>
         <button className="
                     box-border
