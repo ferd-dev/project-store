@@ -11,7 +11,7 @@ const Routes = () => {
 			element: <ProductList />
 		},
 		{
-			path: '/details',
+			path: '/details/:id',
 			element: <ProductDetail />
 		},
 		{
