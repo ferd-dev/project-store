@@ -59,7 +59,8 @@ export default {
 				'Segoe UI Symbol',
 				'Noto Color Emoji'
 			],
-			pacifico: ['Pacifico', 'cursive']
+			pacifico: ['Pacifico', 'cursive'],
+			inter: ['Inter', 'sans-serif']
 		}
 	},
 	plugins: [require('flowbite/plugin')]
