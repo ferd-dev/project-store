@@ -21,8 +21,8 @@ const DetailsProduct = ({ productId }: Props) => {
         <p className="font-inter font-normal text-sm sm:text-base leading-4 sm:leading-5 text-[#1E1E1E] p-2">
             select size
         </p>
-        <ListSize />
-        <div className='flex flex-col sm:flex-row mt-4 justify-between'>
+        
+        <div className='flex flex-col sm:flex-row mt-4 '>
         <button className="
                     box-border
                     flex
@@ -31,6 +31,7 @@ const DetailsProduct = ({ productId }: Props) => {
                     items-center
                     p-4
                     gap-2
+                    m-1
                     w-full
                     sm:w-[221px]
                     h-[56px]
@@ -49,6 +50,7 @@ const DetailsProduct = ({ productId }: Props) => {
         flex-row
         justify-center
         items-center
+        m-1
         p-4
         gap-2
         w-full
