@@ -1,9 +1,17 @@
+import ImageCarousel from '../components/ImageCarousel'; // Asegúrate de que la ruta sea correcta
+import Layout from '../../../shared/components/Layout';
+import DetailsProduct from '../components/DetailsProduct';
+
 const ProductDetail = () => {
     return (
-        <div>
-            <h1>Product Detail</h1>
+      <Layout>
+         <div className="flex justify-center items-center m-3 flex-wrap">
+        <ImageCarousel productId={10} />
+        <DetailsProduct productId={10} />
         </div>
-    );
-};
+      </Layout>
 
+       
+    );
+  };
 export default ProductDetail;
