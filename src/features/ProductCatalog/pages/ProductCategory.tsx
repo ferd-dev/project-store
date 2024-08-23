@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Layout from '../../../shared/components/Layout';
 import Search from '../components/Search';
 import { useEffect, useState } from 'react';
@@ -8,6 +8,7 @@ import CardNameCategory from '../components/CardNameCategory';
 
 const ProductCategory = () => {
   const { id } = useParams<{ id: string }>();
+  const navigate=useNavigate();
   const [products, setProducts] = useState<Product[]>([]);
   const [categoryName, setCategoryName] = useState<string>('');
   const [searchTerm, setSearchTerm] = useState<string>('');
@@ -36,13 +37,17 @@ const ProductCategory = () => {
     fetchCategories();
   }, [id]);
 
-  const handleSearch = (term: string) => {
-    setSearchTerm(term.toLowerCase());
-  };
+const handleNavigate=(productId: number)=>{
+  navigate(`/details/${productId}`);
+}
+    
+const handleSearch = (term: string) => {
+  setSearchTerm(term.toLowerCase());
+};
 
-  const filteredProducts = products.filter((product) =>
-    product.title.toLowerCase().includes(searchTerm)
-  );
+const filteredProducts = products.filter((product) =>
+  product.title.toLowerCase().includes(searchTerm)
+);
 
   return (
     <Layout>
@@ -52,14 +57,17 @@ const ProductCategory = () => {
 
           <CardNameCategory nameCategory={categoryName} />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-5 mb-5">
+
             {filteredProducts.map((product) => (
-              <ProductCard
+              <div key={product.id} onClick={() => handleNavigate(product.id)}>
+              {<ProductCard
                 key={product.id}
                 title={product.title}
                 image={product.images[0]}
                 price={product.price}
                 id={product.id}
-              />
+              />}
+            </div>
             ))}
           </div>
         </div>

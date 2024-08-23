@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 
 type Props = {
   id: number;
@@ -59,21 +61,25 @@ const ProductCard = ({ id, title, price, image }: Props) => {
       </div>
 
       <div className="flex flex-col items-center">
-        <button className="mt-4 border text-black py-1 px-1 rounded-full flex items-center justify-center w-2/4 hover:bg-blue-700 hover:text-white focus:outline-none text-sm">
-          <svg
-            className="w-5 h-5 mr-2"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M3 3h2l.401 1.607A1 1 0 006.382 6h13.236a1 1 0 00.981-.783L21 4H5.401m-2.372 1h18.342a1 1 0 01.98 1.217l-1.5 6A1 1 0 0117.763 13H7.237a1 1 0 01-.981-.783L4.256 6.926M3 3v2m-1 1h4m-4 8h18v2H2v-2z"
-            />
-          </svg>
+        <button className="box-border
+                    flex
+                    flex-row
+                    justify-center
+                    items-center
+                    p-4
+                    gap-2
+                    m-1
+                    w-full
+                    sm:w-[221px]
+                    h-[56px]
+                    border-2
+                    border-[#1F3E97]
+                    rounded-[32px]
+                    mb-2
+                    sm:mb-0
+                     hover:bg-blue-700
+         hover:text-white focus:outline-none text-sm">
+          <FontAwesomeIcon icon={faShoppingCart} className="w-5 h-5 mr-2" />
           Add to cart
         </button>
       </div>
