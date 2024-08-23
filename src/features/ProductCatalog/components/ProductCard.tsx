@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
 type Props = {
@@ -18,6 +19,12 @@ function removeBracketsAndQuotes(str: string): string {
 const imagenDefaiult = '/img/imagen-not-fount.png';
 
 const ProductCard = ({ id, title, price, image }: Props) => {
+  const [filledStars, setFilledStars] = useState(0);
+
+  useEffect(() => {
+    setFilledStars(Math.floor(Math.random() * 6));
+  }, []);
+
   if (endsWithAny(removeBracketsAndQuotes(image))) {
     image = imagenDefaiult;
   }
@@ -33,6 +40,24 @@ const ProductCard = ({ id, title, price, image }: Props) => {
         <h3 className="text-lg font-semibold mt-2">{title}</h3>
         <p className="text-lg font-bold text-black">$ {price}</p>
       </NavLink>
+
+      <div className="flex items-center mt-2">
+        {Array.from({ length: 5 }).map((_, index) => (
+          <svg
+            key={index}
+            className={`w-5 h-5 ${
+              index < filledStars ? 'text-yellow-500' : 'text-gray-300'
+            }`}
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M9.049 2.927a1 1 0 011.902 0l1.286 4.064a1 1 0 00.95.69h4.287a1 1 0 01.592 1.81l-3.48 2.536a1 1 0 00-.364 1.118l1.287 4.064a1 1 0 01-1.54 1.118l-3.48-2.536a1 1 0 00-1.175 0l-3.48 2.536a1 1 0 01-1.54-1.118l1.287-4.064a1 1 0 00-.364-1.118L2.136 9.49a1 1 0 01.592-1.81h4.287a1 1 0 00.95-.69l1.286-4.064z" />
+          </svg>
+        ))}
+        <span className="ml-2 text-sm text-gray-500">{filledStars}/5</span>
+      </div>
+
       <div className="flex flex-col items-center">
         <button className="mt-4 border text-black py-1 px-1 rounded-full flex items-center justify-center w-2/4 hover:bg-blue-700 hover:text-white focus:outline-none text-sm">
           <svg
