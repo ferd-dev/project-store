@@ -10,6 +10,8 @@ const ProductCategory = () => {
   const { id } = useParams<{ id: string }>();
   const [products, setProducts] = useState<Product[]>([]);
   const [categoryName, setCategoryName] = useState<string>('');
+  const [searchTerm, setSearchTerm] = useState<string>('');
+
   useEffect(() => {
     const fetchCategory = async () => {
       const response = await fetch(
@@ -34,15 +36,23 @@ const ProductCategory = () => {
     fetchCategories();
   }, [id]);
 
+  const handleSearch = (term: string) => {
+    setSearchTerm(term.toLowerCase());
+  };
+
+  const filteredProducts = products.filter((product) =>
+    product.title.toLowerCase().includes(searchTerm)
+  );
+
   return (
     <Layout>
       <section>
         <div className="max-w-screen-xl px-4 2xl:px-0 mx-auto">
-          <Search />
+          <Search onSearch={handleSearch} />
 
           <CardNameCategory nameCategory={categoryName} />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-5 mb-5">
-            {products.map((product) => (
+            {filteredProducts.map((product) => (
               <ProductCard
                 key={product.id}
                 title={product.title}
