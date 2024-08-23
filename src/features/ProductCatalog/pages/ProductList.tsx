@@ -6,20 +6,40 @@ import Search from '../components/Search';
 import Loading from '../../../shared/pages/Loading';
 import { useFetchProducts } from '../hooks/useFetchProducts';
 import ServerError from '../../../shared/pages/ServerError';
+import { useState } from 'react';
 
 const ProductList = () => {
   const { products, loading, error } = useFetchProducts();
+  const [searchTerm, setSearchTerm] = useState('');
 
   if (loading) return <Loading />;
   if (error) return <ServerError />;
+
+  const handleSearch = (term: string) => {
+    console.log(term);
+    setSearchTerm(term.toLowerCase());
+  };
+
+  const filteredProducts = Object.entries(products).reduce(
+    (acc, [categoryName, products]) => {
+      const filtered = products.filter((product) =>
+        product.title.toLowerCase().includes(searchTerm)
+      );
+      if (filtered.length > 0) {
+        acc[categoryName] = filtered;
+      }
+      return acc;
+    },
+    {} as typeof products
+  );
 
   return (
     <Layout>
       <section>
         <div className="max-w-screen-xl px-4 2xl:px-0 mx-auto">
-          <Search />
+          <Search onSearch={handleSearch} />
 
-          {Object.entries(products).map(([categoryName, products]) => (
+          {Object.entries(filteredProducts).map(([categoryName, products]) => (
             <div key={categoryName}>
               <CardNameCategory nameCategory={categoryName} />
 
