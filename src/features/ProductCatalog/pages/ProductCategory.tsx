@@ -11,6 +11,8 @@ const ProductCategory = () => {
   const navigate=useNavigate();
   const [products, setProducts] = useState<Product[]>([]);
   const [categoryName, setCategoryName] = useState<string>('');
+  const [searchTerm, setSearchTerm] = useState<string>('');
+
   useEffect(() => {
     const fetchCategory = async () => {
       const response = await fetch(
@@ -26,7 +28,7 @@ const ProductCategory = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       const response = await fetch(
-        `https://api.escuelajs.co/api/v1/categories/${id}/products?limit=5&offset=1`
+        `https://api.escuelajs.co/api/v1/categories/${id}/products?limit=20&offset=1`
       );
       const data = await response.json();
       setProducts(data);
@@ -34,18 +36,29 @@ const ProductCategory = () => {
 
     fetchCategories();
   }, [id]);
+
 const handleNavigate=(productId: number)=>{
   navigate(`/details/${productId}`);
 }
+    
+const handleSearch = (term: string) => {
+  setSearchTerm(term.toLowerCase());
+};
+
+const filteredProducts = products.filter((product) =>
+  product.title.toLowerCase().includes(searchTerm)
+);
+
   return (
     <Layout>
       <section>
         <div className="max-w-screen-xl px-4 2xl:px-0 mx-auto">
-          <Search />
+          <Search onSearch={handleSearch} />
 
           <CardNameCategory nameCategory={categoryName} />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-5 mb-5">
-            {products.map((product) => (
+
+            {filteredProducts.map((product) => (
               <div key={product.id} onClick={() => handleNavigate(product.id)}>
               {<ProductCard
                 key={product.id}

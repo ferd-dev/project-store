@@ -26,8 +26,9 @@ export const useFetchProducts = (): UseFetchProductsReturn => {
         if (!response.ok) throw new Error('Failed to fetch products');
 
         const data: Product[] = await response.json();
+
         const grouped = data.reduce((acc: GroupedProducts, product) => {
-          const categoryName = product.category.name; // Utiliza el nombre de la categoría como clave
+          const categoryName = product.category.name;
           if (!acc[categoryName]) {
             acc[categoryName] = [];
           }
@@ -36,6 +37,7 @@ export const useFetchProducts = (): UseFetchProductsReturn => {
           }
           return acc;
         }, {});
+
         setProducts(grouped);
       } catch (err) {
         console.error(err);
