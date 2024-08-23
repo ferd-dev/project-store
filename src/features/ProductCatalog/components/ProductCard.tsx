@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink } from 'react-router-dom';
 
 type Props = {
   id: number;
@@ -7,12 +7,26 @@ type Props = {
   image: string;
 };
 
-const ProductCard = ({id, title, price, image }: Props) => {
+function endsWithAny(url: string): boolean {
+  return url.endsWith('/any');
+}
+
+function removeBracketsAndQuotes(str: string): string {
+  return str.replace(/^\[\s*"/, '').replace(/"\s*\]$/, '');
+}
+
+const imagenDefaiult = '/img/imagen-not-fount.png';
+
+const ProductCard = ({ id, title, price, image }: Props) => {
+  if (endsWithAny(removeBracketsAndQuotes(image))) {
+    image = imagenDefaiult;
+  }
+
   return (
     <div className="bg-white rounded-lg shadow-lg p-4 flex flex-col justify-between hover:shadow-2xl transition-shadow duration-300">
       <NavLink to={`details/${id}`} className="block flex-grow">
         <img
-          src={image}
+          src={removeBracketsAndQuotes(image) || imagenDefaiult}
           alt="Nombre del producto"
           className="rounded-lg w-full h-auto object-cover"
         />
