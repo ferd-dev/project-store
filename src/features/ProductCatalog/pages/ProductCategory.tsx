@@ -27,7 +27,7 @@ const ProductCategory = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       const response = await fetch(
-        `https://api.escuelajs.co/api/v1/categories/${id}/products?limit=5&offset=1`
+        `https://api.escuelajs.co/api/v1/categories/${id}/products?limit=20&offset=1`
       );
       const data = await response.json();
       setProducts(data);

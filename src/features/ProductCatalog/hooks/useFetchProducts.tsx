@@ -27,7 +27,7 @@ export const useFetchProducts = (): UseFetchProductsReturn => {
 
         const data: Product[] = await response.json();
         const grouped = data.reduce((acc: GroupedProducts, product) => {
-          const categoryName = product.category.name; // Utiliza el nombre de la categoría como clave
+          const categoryName = product.category.name;
           if (!acc[categoryName]) {
             acc[categoryName] = [];
           }
