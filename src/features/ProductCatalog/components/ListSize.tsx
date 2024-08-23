@@ -1,13 +1,18 @@
 import { useState } from 'react';
 
-const sizes = ["38", "39", "40", "41", "42", "43"];
+interface ListSizeProps {
+    sizes: string[];
+};
 
-const ListSize = () => {
+const ListSize = ({ sizes }: ListSizeProps) => {
     const [selectedSize, setSelectedSize] = useState<string | null>(null);
 
     const handleSizeClick = (size: string) => {
         setSelectedSize(size);
     };
+    if (!Array.isArray(sizes) || sizes.length === 0) {
+        return <div>Unique sizes available</div>;
+    }
 
     return (
         <div className="flex flex-wrap">
