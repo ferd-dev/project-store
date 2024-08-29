@@ -18,7 +18,7 @@ function removeBracketsAndQuotes(str: string): string {
   return str.replace(/^\[\s*"/, '').replace(/"\s*\]$/, '');
 }
 
-const imagenDefaiult = '/img/imagen-not-fount.png';
+const imagenDefaiult = 'https://via.placeholder.com/150';
 
 const ProductCard = ({ id, title, price, image }: Props) => {
   const [filledStars, setFilledStars] = useState(0);
@@ -38,6 +38,9 @@ const ProductCard = ({ id, title, price, image }: Props) => {
           src={removeBracketsAndQuotes(image) || imagenDefaiult}
           alt="Nombre del producto"
           className="rounded-lg w-full h-auto object-cover"
+          onError={(e) => {
+            e.currentTarget.src = imagenDefaiult;
+          }}
         />
         <h3 className="text-lg font-semibold mt-2">{title}</h3>
         <p className="text-lg font-bold text-black">$ {price}</p>
