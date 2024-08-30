@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Layout from '../../../shared/components/Layout';
 import Search from '../components/Search';
 import ProductCard from '../components/ProductCard';
@@ -9,7 +9,6 @@ import { useEffect } from 'react';
 
 const ProductCategory = () => {
   const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate();
 
   const { products, categoryName, loading, hasMore, setPage, handleSearch } =
     useFetchProductCategory(id!);
@@ -31,10 +30,6 @@ const ProductCategory = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [loading, hasMore, setPage]);
 
-  const handleNavigate = (productId: number) => {
-    navigate(`/details/${productId}`);
-  };
-
   return (
     <Layout>
       <section>
@@ -43,7 +38,7 @@ const ProductCategory = () => {
           <CardNameCategory nameCategory={categoryName} />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-5 mb-5">
             {products.map((product) => (
-              <div key={product.id} onClick={() => handleNavigate(product.id)}>
+              <div key={product.id}>
                 <ProductCard
                   title={product.title}
                   image={product.images[0]}

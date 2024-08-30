@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
 
 type Props = {
   id: number;
@@ -14,6 +14,11 @@ const imagenDefaiult = 'https://via.placeholder.com/150';
 
 const ProductCard = ({ id, title, price, image }: Props) => {
   const [filledStars, setFilledStars] = useState(0);
+  const navigate = useNavigate();
+
+  const handleNavigate = (productId: number) => {
+    navigate(`/details/${productId}`);
+  };
 
   useEffect(() => {
     setFilledStars(Math.floor(Math.random() * 6));
@@ -21,7 +26,10 @@ const ProductCard = ({ id, title, price, image }: Props) => {
 
   return (
     <div className="bg-white rounded-lg shadow-lg p-4 flex flex-col justify-between hover:shadow-2xl transition-shadow duration-300">
-      <NavLink to={`details/${id}`} className="block flex-grow">
+      <a
+        className="block flex-grow hover:cursor-pointer"
+        onClick={() => handleNavigate(id)}
+      >
         <img
           src={image}
           alt={title}
@@ -32,7 +40,7 @@ const ProductCard = ({ id, title, price, image }: Props) => {
         />
         <h3 className="text-lg font-semibold mt-2">{title}</h3>
         <p className="text-lg font-bold text-black">$ {price}</p>
-      </NavLink>
+      </a>
 
       <div className="flex items-center mt-2">
         {Array.from({ length: 5 }).map((_, index) => (
