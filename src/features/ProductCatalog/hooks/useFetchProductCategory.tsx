@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Product } from '../interfaces/Product';
 
-export const useProductCategory = (categoryId: string) => {
+export const useFetchProductCategory = (categoryId: string) => {
   const [products, setProducts] = useState<Product[]>([]);
   const [categoryName, setCategoryName] = useState<string>('');
   const [searchTerm, setSearchTerm] = useState<string>('');

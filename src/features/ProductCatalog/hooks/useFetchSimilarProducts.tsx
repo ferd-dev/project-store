@@ -7,7 +7,9 @@ interface UseFetchSimilarProductsReturn {
   error: boolean;
 }
 
-export const useFetchSimilarProducts = (categoryId: number): UseFetchSimilarProductsReturn => {
+export const useFetchSimilarProducts = (
+  categoryId: number
+): UseFetchSimilarProductsReturn => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
@@ -15,7 +17,9 @@ export const useFetchSimilarProducts = (categoryId: number): UseFetchSimilarProd
   useEffect(() => {
     const fetchSimilarProducts = async () => {
       try {
-        const response = await fetch(`https://api.escuelajs.co/api/v1/categories/${categoryId}/products`);
+        const response = await fetch(
+          `https://api.escuelajs.co/api/v1/categories/${categoryId}/products`
+        );
         if (!response.ok) throw new Error('Failed to fetch similar products');
 
         const data: Product[] = await response.json();

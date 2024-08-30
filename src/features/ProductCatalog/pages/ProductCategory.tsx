@@ -4,7 +4,7 @@ import Search from '../components/Search';
 import ProductCard from '../components/ProductCard';
 import CardNameCategory from '../components/CardNameCategory';
 import Loading from '../../../shared/pages/Loading';
-import { useProductCategory } from '../hooks/useFetchProductCategory';
+import { useFetchProductCategory } from '../hooks/useFetchProductCategory';
 import { useEffect } from 'react';
 
 const ProductCategory = () => {
@@ -12,7 +12,7 @@ const ProductCategory = () => {
   const navigate = useNavigate();
 
   const { products, categoryName, loading, hasMore, setPage, handleSearch } =
-    useProductCategory(id!);
+    useFetchProductCategory(id!);
 
   useEffect(() => {
     const handleScroll = () => {
