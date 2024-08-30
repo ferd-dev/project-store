@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { NavLink } from "react-router-dom";
+import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 
@@ -10,14 +10,6 @@ type Props = {
   image: string;
 };
 
-function endsWithAny(url: string): boolean {
-  return url.endsWith('/any');
-}
-
-function removeBracketsAndQuotes(str: string): string {
-  return str.replace(/^\[\s*"/, '').replace(/"\s*\]$/, '');
-}
-
 const imagenDefaiult = 'https://via.placeholder.com/150';
 
 const ProductCard = ({ id, title, price, image }: Props) => {
@@ -27,16 +19,12 @@ const ProductCard = ({ id, title, price, image }: Props) => {
     setFilledStars(Math.floor(Math.random() * 6));
   }, []);
 
-  if (endsWithAny(removeBracketsAndQuotes(image))) {
-    image = imagenDefaiult;
-  }
-
   return (
     <div className="bg-white rounded-lg shadow-lg p-4 flex flex-col justify-between hover:shadow-2xl transition-shadow duration-300">
       <NavLink to={`details/${id}`} className="block flex-grow">
         <img
-          src={removeBracketsAndQuotes(image) || imagenDefaiult}
-          alt="Nombre del producto"
+          src={image}
+          alt={title}
           className="rounded-lg w-full h-auto object-cover"
           onError={(e) => {
             e.currentTarget.src = imagenDefaiult;
@@ -64,24 +52,27 @@ const ProductCard = ({ id, title, price, image }: Props) => {
       </div>
 
       <div className="flex flex-col items-center">
-        <button className="box-border
-                    flex
-                    flex-row
-                    justify-center
-                    items-center
-                    p-4
-                    gap-2
-                    m-1
-                    w-full
-                    sm:w-[221px]
-                    h-[56px]
-                    border-2
-                    border-[#1F3E97]
-                    rounded-[32px]
-                    mb-2
-                    sm:mb-0
-                     hover:bg-blue-700
-         hover:text-white focus:outline-none text-sm">
+        <button
+          className="box-border
+            flex
+            flex-row
+            justify-center
+            items-center
+            p-4
+            gap-2
+            m-1
+            w-full
+            sm:w-[221px]
+            h-[56px]
+            border-2
+            border-[#1F3E97]
+            rounded-[32px]
+            mb-2
+            sm:mb-0
+            hover:bg-blue-700
+           hover:text-white focus:outline-none text-sm
+            mt-5"
+        >
           <FontAwesomeIcon icon={faShoppingCart} className="w-5 h-5 mr-2" />
           Add to cart
         </button>
