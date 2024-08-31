@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
+import { CardContext } from '../../../shared/context/CardContext';
 
 type Props = {
   id: number;
@@ -15,6 +16,7 @@ const imagenDefaiult = 'https://via.placeholder.com/150';
 const ProductCard = ({ id, title, price, image }: Props) => {
   const [filledStars, setFilledStars] = useState(0);
   const navigate = useNavigate();
+  const context = useContext(CardContext);
 
   const handleNavigate = (productId: number) => {
     navigate(`/details/${productId}`);
@@ -23,6 +25,10 @@ const ProductCard = ({ id, title, price, image }: Props) => {
   useEffect(() => {
     setFilledStars(Math.floor(Math.random() * 6));
   }, []);
+
+  const handleAddProduct = () => {
+    context?.addProduct(id);
+  };
 
   return (
     <div className="bg-white rounded-lg shadow-lg p-4 flex flex-col justify-between hover:shadow-2xl transition-shadow duration-300">
@@ -80,6 +86,7 @@ const ProductCard = ({ id, title, price, image }: Props) => {
             hover:bg-blue-700
            hover:text-white focus:outline-none text-sm
             mt-5"
+          onClick={() => handleAddProduct()}
         >
           <FontAwesomeIcon icon={faShoppingCart} className="w-5 h-5 mr-2" />
           Add to cart

@@ -2,11 +2,14 @@ import { useFetchProductDetail } from '../hooks/useFetchProductDetail';
 import ListSize from './ListSize';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import { useContext } from 'react';
+import { CardContext } from '../../../shared/context/CardContext';
 
 type Props = {
   productId: number;
 };
 const DetailsProduct = ({ productId }: Props) => {
+  const context = useContext(CardContext);
   const { product, loading, error } = useFetchProductDetail(productId);
   const categorySizes: { [key: string]: string[] } = {
     Shoes: ['36', '37', '38', '39', '40', '41', '42', '43'],
@@ -18,6 +21,7 @@ const DetailsProduct = ({ productId }: Props) => {
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error loading product details</div>;
   const discount = Math.random() * 0.8;
+
   return (
     <>
       <div className="p-4 sm:p-6">
@@ -36,6 +40,7 @@ const DetailsProduct = ({ productId }: Props) => {
         <ListSize sizes={sizes} />
         <div className="flex flex-col sm:flex-row mt-4 ">
           <button
+            onClick={() => context?.addProduct(productId)}
             className="
               box-border
               flex
