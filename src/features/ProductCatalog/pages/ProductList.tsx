@@ -7,6 +7,7 @@ import Loading from '../../../shared/pages/Loading';
 import { useFetchProducts } from '../hooks/useFetchProducts';
 import ServerError from '../../../shared/pages/ServerError';
 import { useState } from 'react';
+import { debounce } from 'lodash';
 
 const ProductList = () => {
   const { products, loading, error } = useFetchProducts();
@@ -15,10 +16,9 @@ const ProductList = () => {
   if (loading) return <Loading />;
   if (error) return <ServerError />;
 
-  const handleSearch = (term: string) => {
-    console.log(term);
+  const debouncedHandleSearch = debounce((term: string) => {
     setSearchTerm(term.toLowerCase());
-  };
+  }, 300);
 
   const filteredProducts = Object.entries(products).reduce(
     (acc, [categoryName, products]) => {
@@ -37,7 +37,7 @@ const ProductList = () => {
     <Layout>
       <section>
         <div className="max-w-screen-xl px-4 2xl:px-0 mx-auto">
-          <Search onSearch={handleSearch} />
+          <Search onSearch={debouncedHandleSearch} />
 
           {Object.entries(filteredProducts).map(([categoryName, products]) => (
             <div key={categoryName}>

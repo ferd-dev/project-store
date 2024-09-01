@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Product } from '../interfaces/Product';
+import { debounce } from 'lodash';
 
 export const useFetchProductCategory = (categoryId: string) => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -63,9 +64,9 @@ export const useFetchProductCategory = (categoryId: string) => {
     fetchMoreProducts();
   }, [categoryId, page, hasMore]);
 
-  const handleSearch = (term: string) => {
+  const debouncedHandleSearch = debounce((term: string) => {
     setSearchTerm(term.toLowerCase());
-  };
+  }, 300);
 
   const filteredProducts = products.filter((product) =>
     product.title.toLowerCase().includes(searchTerm)
@@ -77,6 +78,6 @@ export const useFetchProductCategory = (categoryId: string) => {
     loading,
     hasMore,
     setPage,
-    handleSearch,
+    debouncedHandleSearch,
   };
 };
