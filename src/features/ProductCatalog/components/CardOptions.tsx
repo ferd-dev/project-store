@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useFetchProductDetail } from "../hooks/useFetchProductDetail";
 import { useFetchSimilarProducts } from "../hooks/useFetchSimilarProducts";
 import ProductCard from "./ProductCard";
@@ -15,6 +15,13 @@ const CardOptions = ({productId}:Props) => {
   const { product, loading, error } = useFetchProductDetail(productId);
   const { products: similarProducts, loading: similarLoading, error: similarError } = useFetchSimilarProducts(product?.category.id || 0);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (product && product.description) {
+      setDisplayText(product.description);
+      setSelectedButton('description');
+    }
+  }, [product]);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
