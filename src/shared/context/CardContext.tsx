@@ -34,7 +34,7 @@ export const CardContext = createContext<CardContextType | undefined>(
 
 export const CardProvider: React.FC<LayoutProps> = ({ children }) => {
   const [count, setCount] = useState(0);
-  const [products, setProducts] = useState<Product[]>();
+  const [products, setProducts] = useState<Product[]>([]);
 
   const addProduct = async (id: number) => {
     id = Number(id);
@@ -66,13 +66,21 @@ export const CardProvider: React.FC<LayoutProps> = ({ children }) => {
   };
 
   const removeProduct = (id: number) => {
-    setProducts((prev) => {
-      if (!prev) return prev;
-
-      const updatedProducts = prev.filter((product) => product.id !== id);
-      setCount(count - 1);
-      return updatedProducts;
+    setProducts((prevProducts) => {
+      const productIndex = prevProducts.findIndex((product) => product.id === id);
+      if (productIndex !== -1) {
+        const updatedProducts = [...prevProducts];
+        if (updatedProducts[productIndex].amount > 1) {
+          updatedProducts[productIndex].amount -= 1;
+        } else {
+          updatedProducts.splice(productIndex, 1);
+          setCount((prevCount) => (prevCount > 0 ? prevCount - 1 : 0));
+        }
+        return updatedProducts;
+      }
+      return prevProducts;
     });
+    
   };
 
   return (
