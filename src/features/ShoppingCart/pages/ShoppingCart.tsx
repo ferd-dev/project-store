@@ -44,7 +44,7 @@ const ShoppingCart = () => {
             >
               <div className="flex items-center space-x-4">
                 <img
-                  src="https://via.placeholder.com/150"
+                  src={product.images[0] || 'https://via.placeholder.com/150'}
                   alt={product.title}
                   className="w-20 h-20 object-cover rounded-lg shadow-md"
                 />
