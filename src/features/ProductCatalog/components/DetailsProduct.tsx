@@ -17,7 +17,16 @@ const DetailsProduct = ({ productId }: Props) => {
     : [];
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error loading product details</div>;
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
   const discount = Math.random() * 0.8;
+=======
+=======
+
+>>>>>>> Stashed changes
+
+
+>>>>>>> Stashed changes
   return (
     <>
       <div className="p-4 sm:p-6">
@@ -28,7 +37,7 @@ const DetailsProduct = ({ productId }: Props) => {
           Price: $ {product?.price}
         </p>
         <p className="font-inter font-medium text-2xl sm:text-4xl leading-8 sm:leading-12 text-[#1F3E97] p-2">
-          Price: ${product ? (product.price * discount).toFixed(2) : ''}
+          Price: ${product ? (product.price * 0.9).toFixed(2) : ''}
         </p>
         <p className="font-inter font-normal text-sm sm:text-base leading-4 sm:leading-5 text-[#1E1E1E] p-2">
           select size
