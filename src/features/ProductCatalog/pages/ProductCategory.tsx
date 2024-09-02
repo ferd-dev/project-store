@@ -10,8 +10,14 @@ import { useEffect } from 'react';
 const ProductCategory = () => {
   const { id } = useParams<{ id: string }>();
 
-  const { products, categoryName, loading, hasMore, setPage, handleSearch } =
-    useFetchProductCategory(id!);
+  const {
+    products,
+    categoryName,
+    loading,
+    hasMore,
+    setPage,
+    debouncedHandleSearch,
+  } = useFetchProductCategory(id!);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -34,7 +40,7 @@ const ProductCategory = () => {
     <Layout>
       <section>
         <div className="max-w-screen-xl px-4 2xl:px-0 mx-auto">
-          <Search onSearch={handleSearch} />
+          <Search onSearch={debouncedHandleSearch} />
           <CardNameCategory nameCategory={categoryName} />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-5 mb-5">
             {products.map((product) => (
